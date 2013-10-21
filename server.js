@@ -1,4 +1,5 @@
 var restify = require('restify');
+var _ = require('lodash');
 
 var server = restify.createServer({
   name: 'myapp',
@@ -10,25 +11,36 @@ server.use(restify.bodyParser());
 
 
 var todoslist = {};
+var id = 0;
 
-
-server.get('/todos/:name', function (req, res, next) {
-  res.send(todoslist[req.params.name]);
+server.get('/todos/:id', function (req, res, next) {
+  res.send(todoslist[req.params.id]);
   return  next();
 });
 
 server.get('/todos/', function (req, res, next) {
   console.log(' TODOLIST ', todoslist );
-  res.send( todoslist);
+  res.send( _.values(todoslist));
   return next();
 });
 
-server.put('/todos/', function (req, res, next) {
-  todoslist[req.body.name] = { 'body' : req.body.body, 'done' : false };
-  res.send( todoslist );
+server.post('/todos/', function (req, res, next) {
+  todoslist[++id] = { id: id, name : req.body.name, done : false };
+  res.send( todoslist[id] );
   return next();
 });
 
-server.listen(8080, function () {
+server.put('/todos/:id', function (req, res, next) {
+  todoslist[req.params.id] = { id: req.params.id, name : req.body.name, done : req.body.done };
+  res.send( todoslist[req.params.id] );
+  return next();
+});
+
+server.get(/(\/public)\/?.*/, restify.serveStatic({
+  directory: './public/',
+  default: "index.html"
+}));
+
+server.listen(8085, function () {
   console.log('%s listening at %s', server.name, server.url);
 });

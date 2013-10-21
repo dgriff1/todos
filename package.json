@@ -1,0 +1,22 @@
+{
+  "name": "todos",
+  "version": "0.0.0",
+  "description": "Todos App",
+  "main": "server.js",
+  "dependencies": {
+    "restify": "~2.6.0",
+    "lodash": "~2.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dgriff1/todos.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "54d53524a9e69df3a6e74059d529d7f35ec8d9cf"
+}
