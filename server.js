@@ -9,18 +9,17 @@ server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
 
-var todoslist = [];
+var todoslist = {};
 
 
 server.get('/todos/:name', function (req, res, next) {
-  console.log(" %s params ", req.params.name); 
-  res.send(req.params.name);
+  res.send(todoslist[req.params.name]);
   return  next();
 });
 
 server.get('/todos/', function (req, res, next) {
-  console.log(' PARAMS ', todoslist );
-  res.send( todoslist );
+  console.log(' TODOLIST ', todoslist );
+  res.send( todoslist);
   return next();
 });
 

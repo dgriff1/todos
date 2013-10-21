@@ -8,10 +8,17 @@ var client = restify.createJsonClient({
 
 client.put('/todos', { 'name' : 'todo1', 'body' : 'todo this today' }, function (err, req, res, obj) {
 	assert.ifError(err);
-	console.log('Server returned: %j', obj);
+	console.log('Put returned: %j', obj);
+
 });
 
 client.get('/todos', function (err, req, res, obj) {
 	assert.ifError(err);
-	console.log('Server returned: %j', obj);
+	console.log('Get returned: %j', obj);
+}); 
+	
+
+client.get('/todos/todo1', function (err, req, res, obj) {
+	assert.ifError(err);
+	console.log('Get Specific returned: %j', obj);
 }); 
